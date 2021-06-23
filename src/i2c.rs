@@ -440,7 +440,7 @@ mod stm32l4x1_pins {
     pins!(I2C4, AF3, SCL: [PB10], SDA: [PB11]);
 }
 
-#[cfg(feature = "stm32l4x2")]
+#[cfg(all(feature = "stm32l4x2", not(feature = "stm32l452")))]
 mod stm32l4x2_pins {
     use super::{I2C1, I2C2, I2C3, I2C4};
     use crate::gpio::*;
@@ -464,6 +464,24 @@ mod stm32l4x2_pins {
     pins!(I2C4, AF2, SCL: [PC0], SDA: [PC1]);
     pins!(I2C4, AF3, SCL: [PB10], SDA: [PB11]);
     pins!(I2C4, AF4, SCL: [PD12], SDA: [PD13]);
+}
+
+#[cfg(feature = "stm32l452")]
+mod stm32l452_pins {
+    use super::{I2C1, I2C2, I2C3, I2C4};
+    use crate::gpio::*;
+    use gpioa::*;
+    use gpiob::*;
+    use gpioc::*;
+    use gpiod::*;
+
+    pins!(I2C4, AF2, SCL: [PC0], SDA: [PC1]);
+    pins!(I2C4, AF3, SCL: [PB10], SDA: [PB11]);
+    pins!(I2C1, AF4, SCL: [PA9, PB6, PB8], SDA: [PA10, PB7, PB9]);
+    pins!(I2C2, AF4, SCL: [PB10, PB13], SDA: [PB11, PB14]);
+    pins!(I2C3, AF4, SCL: [PC0, PA7], SDA: [PC1, PB4]);
+    pins!(I2C4, AF4, SCL: [PD12], SDA: [PD13]);
+    pins!(I2C4, AF5, SCL: [PB6], SDA: [PB7]);
 }
 
 #[cfg(feature = "stm32l4x3")]
